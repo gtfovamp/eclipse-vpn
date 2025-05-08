@@ -43,4 +43,4 @@ async def get_vpn_data():
         return vpn_list
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=10000)  # 10000 — порт по умолчанию на Render
+    uvicorn.run(app, host="0.0.0.0", port=8000)
