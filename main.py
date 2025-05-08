@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import httpx
 import csv
 from io import StringIO
+import uvicorn  
 
 app = FastAPI()
 
@@ -42,5 +43,4 @@ async def get_vpn_data():
         return vpn_list
     
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=10000)  # 10000 — порт по умолчанию на Render
