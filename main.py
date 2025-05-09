@@ -4,14 +4,18 @@ import csv
 from io import StringIO
 import uvicorn
 import base64
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-def safe_int(value, default=0):
-    try:
-        return int(value)
-    except (ValueError, TypeError):
-        return default
+# Настройка CORS для обхода ограничений
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Разрешаем запросы со всех доменов
+    allow_credentials=True,
+    allow_methods=["*"],  # Разрешаем все HTTP-методы
+    allow_headers=["*"],  # Разрешаем все заголовки
+)
 
 @app.get("/vpn-data/")
 async def get_vpn_data():
