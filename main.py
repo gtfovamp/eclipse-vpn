@@ -2,7 +2,8 @@ from fastapi import FastAPI
 import httpx
 import csv
 from io import StringIO
-import uvicorn  
+import uvicorn
+import base64
 
 app = FastAPI()
 
@@ -37,7 +38,7 @@ async def get_vpn_data():
                 "uptime": safe_int(row[7]),
                 "total_users": safe_int(row[8]),
                 "total_traffic": safe_int(row[9]),
-                "config": row[14] if len(row) > 14 else ""
+                "config": base64.b64decode(row[14] if len(row) > 14 else "").decode('utf-8')
             })
         
         return vpn_list
